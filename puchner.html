@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Martin Puchner — Full Interview Prep Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0d0d;
+  --surface: #141414;
+  --surface2: #1c1c1c;
+  --border: #2a2a2a;
+  --accent: #7ec8c8;
+  --accent2: #5aadad;
+  --text: #e8e3d8;
+  --text-dim: #7a7570;
+  --text-mid: #b0ab9f;
+  --red: #c94040;
+  --blue: #4a8ec4;
+  --green: #4caf7d;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'IBM Plex Sans', sans-serif; font-weight: 300; line-height: 1.7; font-size: 17px; }
+.shell { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+.sidebar { background: var(--surface); border-right: 1px solid var(--border); position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 28px 0; }
+.sidebar-header { padding: 0 22px 20px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.sidebar-header .logo { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .2em; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; }
+.sidebar-header h2 { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 400; color: var(--text); line-height: 1.4; }
+.nav-section { padding: 6px 22px; }
+.nav-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .2em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; margin-top: 12px; }
+.nav-item { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 4px; cursor: pointer; transition: all .15s; margin-bottom: 2px; text-decoration: none; }
+.nav-item:hover { background: var(--surface2); }
+.nav-item.active { background: rgba(126,200,200,.1); }
+.nav-item .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
+.nav-item.active .dot { background: var(--accent); }
+.nav-item span { font-size: 12px; color: var(--text-mid); line-height: 1.3; }
+.nav-item.active span { color: var(--text); }
+.nav-item .timing { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-dim); white-space: nowrap; }
+.nav-item .timing.highlight { color: var(--accent); }
+.main { padding: 48px 56px; max-width: 860px; }
+.phase-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .2em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+.phase-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 400; line-height: 1.25; margin-bottom: 6px; }
+.phase-desc { color: var(--text-dim); font-size: 13px; margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 24px 28px; margin-bottom: 20px; }
+.card-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.card-label.q { color: var(--accent); }
+.card-label.transition { color: #e87e4a; }
+.card-label.phrase { color: var(--accent2); }
+.card-label::before { content: ''; display: block; width: 14px; height: 1px; background: currentColor; opacity: .5; }
+.card h3 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 400; line-height: 1.4; margin-bottom: 4px; }
+.card p, .card li { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
+.card ul { padding-left: 18px; }
+.card li { margin-bottom: 4px; }
+.expected-block { background: rgba(76,175,125,.06); border-left: 2px solid var(--green); padding: 14px 16px; border-radius: 0 4px 4px 0; margin-top: 14px; }
+.expected-block .label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .15em; color: var(--green); text-transform: uppercase; margin-bottom: 6px; }
+.expected-block p { font-size: 13px; color: #9ec9b0; line-height: 1.65; }
+.fallback-block { background: rgba(201,64,64,.06); border-left: 2px solid var(--red); padding: 14px 16px; border-radius: 0 4px 4px 0; margin-top: 12px; }
+.fallback-block .label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .15em; color: var(--red); text-transform: uppercase; margin-bottom: 6px; }
+.fallback-block p { font-size: 13px; color: #c9908f; line-height: 1.65; }
+.note-block { background: rgba(155,126,232,.07); border-left: 2px solid #9b7ee8; padding: 14px 16px; border-radius: 0 4px 4px 0; margin-top: 12px; }
+.note-block .label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .15em; color: #9b7ee8; text-transform: uppercase; margin-bottom: 6px; }
+.note-block p { font-size: 13px; color: #b3a0e0; line-height: 1.65; }
+.transition-card { background: rgba(232,126,74,.07); border: 1px solid rgba(232,126,74,.2); border-radius: 6px; padding: 18px 22px; margin-bottom: 20px; }
+.transition-card .label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .15em; color: #e87e4a; text-transform: uppercase; margin-bottom: 8px; }
+.transition-card p { font-size: 14px; color: #e0b49a; line-height: 1.65; }
+.script-line { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.script-line:last-child { border-bottom: none; }
+.script-line .speaker { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); min-width: 60px; padding-top: 2px; flex-shrink: 0; }
+.script-line .text { font-size: 14px; color: var(--text); line-height: 1.6; }
+.script-line .ko { font-size: 13px; color: var(--text-mid); margin-top: 4px; line-height: 1.6; }
+.sub-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .15em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 10px; margin-top: 20px; }
+.phrase-list { display: flex; flex-direction: column; gap: 10px; }
+.phrase-item { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 0 4px 4px 0; font-size: 13px; color: var(--text); font-style: italic; line-height: 1.5; }
+.progress-strip { position: fixed; top: 0; left: 260px; right: 0; height: 2px; background: var(--border); z-index: 100; }
+.progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width .3s; }
+.q-block { margin-bottom: 28px; }
+.q-block .q-header { display: flex; align-items: flex-start; gap: 14px; cursor: pointer; padding: 18px 22px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; transition: border-color .2s; }
+.q-block .q-header:hover { border-color: var(--accent); }
+.q-block .q-num { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--accent); min-width: 32px; padding-top: 3px; }
+.q-block .q-text h3 { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 400; line-height: 1.4; margin-bottom: 3px; }
+.q-block .q-text .ko-q { font-size: 13px; color: var(--text-mid); }
+.q-block .chevron { margin-left: auto; color: var(--text-dim); font-size: 12px; padding-top: 4px; transition: transform .2s; }
+.q-block.open .chevron { transform: rotate(180deg); }
+.q-block .q-body { display: none; background: var(--surface); border: 1px solid var(--border); border-top: none; border-radius: 0 0 6px 6px; padding: 20px 22px; }
+.q-block.open .q-body { display: block; }
+.page { display: none; }
+.page.active { display: block; }
+.topbar { position: sticky; top: 0; background: rgba(13,13,13,.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 12px 56px; display: flex; align-items: center; gap: 16px; z-index: 50; margin: -48px -56px 32px; }
+.topbar-section { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text-dim); }
+.topbar-section .current { color: var(--accent); font-weight: 500; }
+.topbar-sep { color: var(--border); }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; }
+.badge-teal { background: rgba(126,200,200,.15); color: var(--accent); }
+.badge-red { background: rgba(201,64,64,.15); color: var(--red); }
+.badge-blue { background: rgba(74,142,196,.15); color: var(--blue); }
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.hamburger { display: none; position: fixed; top: 12px; left: 12px; z-index: 400; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; cursor: pointer; flex-direction: column; gap: 5px; }
+.hamburger span { display: block; width: 20px; height: 2px; background: var(--text); border-radius: 2px; }
+.sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 300; }
+.sidebar-overlay.active { display: block; }
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .shell { grid-template-columns: 1fr; }
+  .sidebar { position: fixed; left: -290px; top: 0; width: 280px; height: 100vh; z-index: 350; transition: left .25s ease; box-shadow: 4px 0 24px rgba(0,0,0,.5); }
+  .sidebar.open { left: 0; }
+  .main { padding: 60px 18px 40px; max-width: 100%; }
+  .topbar { padding: 12px 16px 12px 52px; margin: -60px -18px 24px; }
+  .topbar-sep { display: none; }
+  .topbar-section:not(:last-of-type) { display: none; }
+  .phase-title { font-size: 22px; }
+  .card { padding: 14px 16px; }
+  .script-line { flex-direction: column; gap: 3px; }
+  .script-line .speaker { min-width: unset; }
+  .progress-strip { left: 0; }
+  .q-block .q-text h3 { font-size: 14px; }
+  .q-block .q-header { padding: 12px 14px; }
+}
+</style>
+</head>
+<body>
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">
+  <span></span><span></span><span></span>
+</button>
+<div class="progress-strip"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="shell">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">YTN · The Prompt</div>
+    <h2>Martin Puchner<br>Interview Prep</h2>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Pre-Interview</div>
+    <a class="nav-item active" onclick="goTo('pre',this)"><span class="dot"></span><span>Phase 1–3 · Arrival & Setup</span><span class="timing highlight">Before filming</span></a>
+    <a class="nav-item" onclick="goTo('briefing',this)"><span class="dot"></span><span>Program Briefing</span><span class="timing">~1 min</span></a>
+
+    <div class="nav-label">Main Interview</div>
+    <a class="nav-item" onclick="goTo('s1',this)"><span class="dot"></span><span>S1 · AI — How Do You Define It?</span></a>
+    <a class="nav-item" onclick="goTo('s2',this)"><span class="dot"></span><span>S2 · AI as a New Species</span></a>
+    <a class="nav-item" onclick="goTo('s3',this)"><span class="dot"></span><span>S3 · Language, LLMs & Culture</span></a>
+    <a class="nav-item" onclick="goTo('s4',this)"><span class="dot"></span><span>S4 · Philosophy & Education</span></a>
+    <a class="nav-item" onclick="goTo('s5',this)"><span class="dot"></span><span>S5 · Future of Education</span></a>
+    <a class="nav-item" onclick="goTo('s6',this)"><span class="dot"></span><span>S6 · Books & Human Record</span></a>
+
+    <div class="nav-label">Closing</div>
+    <a class="nav-item" onclick="goTo('closing',this)"><span class="dot"></span><span>Closing Qs — All Guests</span></a>
+    <a class="nav-item" onclick="goTo('end',this)"><span class="dot"></span><span>Wrap & Gift</span></a>
+
+    <div class="nav-label">Reference</div>
+    <a class="nav-item" onclick="goTo('about',this)"><span class="dot"></span><span>About Martin Puchner</span></a>
+  </div>
+</aside>
+
+<main class="main" id="mainContent">
+
+<!-- ============================================================ -->
+<!-- PAGE: PRE -->
+<!-- ============================================================ -->
+<div class="page active" id="page-pre">
+  <div class="topbar">
+    <span class="topbar-section"><span class="current">Pre-Interview</span></span>
+    <span class="topbar-sep">·</span>
+    <span class="topbar-section">Arrival → Setup → Pre-Interview Talk</span>
+    <span class="badge badge-teal">Before filming</span>
+  </div>
+
+  <div class="phase-label">Phase 1–3 — Pre-Interview</div>
+  <h1 class="phase-title">Arrival, Setup<br>&amp; Pre-Interview</h1>
+  <p class="phase-desc">5 phases before the formal interview begins. Camera rolls from the start — capture natural expressions for insert shots.</p>
+
+  <!-- PHASE 1 -->
+  <div class="sub-label">① Phase 1 — Arrival & Welcome</div>
+
+  <div class="card">
+    <div class="card-label transition">→ First hello at the door</div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"Professor Puchner — hello! I'm Se-hee Yang, producer at YTN. It's such a pleasure to finally meet you in person."</div>
+        <div class="ko">푸크너 교수님, 안녕하세요! YTN 피디 양세희입니다. 직접 뵙게 되어 정말 반갑습니다.</div>
+      </div>
+    </div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"We flew in from Seoul — it's been quite a journey, but we've genuinely been looking forward to this."</div>
+        <div class="ko">서울에서 날아왔어요. 꽤 긴 여정이었지만, 정말 오래 기다려왔던 자리예요.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label transition">→ Team intro</div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"Let me introduce our team — this is Chang-rim Ryu, my co-producer, who's been deep in your books for the past few weeks."</div>
+        <div class="ko">저희 팀 소개할게요 — 이쪽은 유창림 피디예요. 지난 몇 주 동안 교수님 책 정말 깊이 읽었어요.</div>
+      </div>
+    </div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"And this is Byung-gu Lee — our director and coordinator, and honestly the reason this trip happened at all."</div>
+        <div class="ko">그리고 이쪽은 이병구 감독님 — 솔직히 이분 없었으면 이 출장 자체가 성사 안 됐을 거예요.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label transition">→ 감사 & 날씨 & 공간 칭찬</div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"Thank you so much for making time for us. The weather here is beautiful — Seoul in May can be unpredictable. This is a real treat."</div>
+        <div class="ko">시간 내주셔서 정말 감사해요. 날씨가 정말 좋네요 — 서울 5월은 좀 변덕스럽거든요. 여기 오길 잘했어요.</div>
+      </div>
+    </div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"What a wonderful space — there's something fitting about having this conversation here."</div>
+        <div class="ko">정말 멋진 공간이네요 — 이런 곳에서 이런 대화를 나눈다는 게 참 잘 어울린다는 생각이 들어요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="sub-label">② Phase 2 — Setup</div>
+
+  <div class="card">
+    <div class="card-label transition">→ 촬영 장소 물어보기</div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"Where would be the most comfortable place for us to film? We're completely flexible — wherever feels natural to you."</div>
+        <div class="ko">어디서 촬영하면 가장 편하실까요? 저희는 완전히 유연하게 맞출 수 있어요 — 교수님께 자연스러운 공간이면 어디든 좋아요.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label transition">→ 이동하면서 / 비행 소감 나누기</div>
+    <div class="script-line">
+      <div class="speaker">PUCHNER</div>
+      <div><div class="text">"How was your flight from Seoul?"</div></div>
+    </div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"It was quite a journey — about fourteen hours! But I spent most of it reading your books, so honestly it was time well spent."</div>
+        <div class="ko">꽤 긴 여정이었어요 — 14시간 정도요! 대부분 교수님 책 읽으면서 왔는데, 나름 잘 쓴 것 같아요.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label transition">→ 자리 잡고 / 음료 받기</div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"Could you give us just a moment while we get set up? And please don't wait for us — feel free to have your coffee."</div>
+        <div class="ko">저희 셋업하는 동안 잠깐만 기다려주실 수 있으세요? 커피는 편하게 드세요, 기다리지 마시고요.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label q">→ 호칭 확인</div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"By the way — how should I address you? Professor Puchner, or would you prefer Martin?"</div>
+        <div class="ko">그런데 어떻게 불러드리면 좋을까요? 푸크너 교수님이라고 할까요, 아니면 마틴이라고 불러드릴까요?</div>
+      </div>
+    </div>
+    <div class="expected-block" style="margin-top:10px">
+      <div class="label">If he says "Call me Martin"</div>
+      <p>"Thank you, Martin. Then please, just call me Se-hee."</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label transition">→ 비하인드씬 촬영 양해</div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"Do you mind if we keep the cameras rolling while we set up? We're just capturing some behind-the-scenes footage."</div>
+        <div class="ko">세팅하는 동안 카메라 계속 돌려도 괜찮을까요? 비하인드 장면 좀 담으려고요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="sub-label">③ Phase 3 — Pre-Interview Talk (~30 min setup)</div>
+
+  <div class="card">
+    <div class="card-label transition">→ 프로그램 소개 + 번역 앱 양해</div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"While we set up — I'd love to give you a quick overview of our program. It'll take about a minute. Is that alright?"</div>
+        <div class="ko">셋업하는 동안 저희 프로그램에 대해 잠깐 말씀드려도 될까요? 1분 정도면 돼요.</div>
+      </div>
+    </div>
+    <div class="script-line" style="margin-top:8px">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"Also — I want to be upfront with you. My English is a work in progress, so I may occasionally use a translation app to make sure I'm expressing myself accurately. I hope that's okay."</div>
+        <div class="ko">그리고 솔직하게 말씀드리면, 제 영어가 아직 완벽하지 않아서 가끔 번역 앱을 쓸 수 있어요. 정확하게 표현하고 싶어서요. 괜찮으실까요?</div>
+      </div>
+    </div>
+    <div class="note-block" style="margin-top:10px">
+      <div class="label">번역 앱 사용 팁</div>
+      <p>이걸 먼저 말해두면 오히려 신뢰감이 생겨. "솔직하고 성실한 인터뷰어"라는 인상을 줌. 당황하지 말고 자연스럽게 꺼내면 돼.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label transition">→ 그가 할 법한 질문들 & 세희 답변</div>
+
+    <div class="script-line">
+      <div class="speaker">PUCHNER</div>
+      <div><div class="text">"How long is the documentary? How many episodes?"</div></div>
+    </div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"Half the episodes air in spring and summer, and the other half in fall and winter."</div>
+        <div class="ko">상반기에 절반, 하반기에 절반 방영돼요.</div>
+      </div>
+    </div>
+
+    <div class="script-line" style="margin-top:10px">
+      <div class="speaker">PUCHNER</div>
+      <div><div class="text">"Who else are you interviewing?"</div></div>
+    </div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"We're meeting with thinkers across different fields — education, economics, technology, and culture. You're our expert on AI, language, and cultural history."</div>
+        <div class="ko">교육, 경제, 기술, 문화 등 다양한 분야의 분들을 만나고 있어요. 교수님은 AI와 언어, 문화사 전문가로 모셨습니다.</div>
+      </div>
+    </div>
+
+    <div class="script-line" style="margin-top:10px">
+      <div class="speaker">PUCHNER</div>
+      <div><div class="text">"What's your target audience?"</div></div>
+    </div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"Decision-makers and leaders in Korea who want to prepare for the future the right way — people who care about both global issues and new ideas."</div>
+        <div class="ko">미래를 제대로 준비하고 싶은 한국의 의사결정자들과 리더들이에요. 글로벌 이슈와 새로운 아이디어에 관심 많은 분들이요.</div>
+      </div>
+    </div>
+
+    <div class="script-line" style="margin-top:10px">
+      <div class="speaker">PUCHNER</div>
+      <div><div class="text">"How will you use the interview?"</div></div>
+    </div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"We want to focus on your core story. The final length depends on the interview, but we'll make sure it represents you well."</div>
+        <div class="ko">교수님의 핵심 이야기에 집중할 거예요. 최종 길이는 인터뷰에 따라 달라지지만, 잘 담아드릴게요.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label transition">→ 셋업 완료 대기 요청 (~30분)</div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"Our setup will take about 30 minutes. Please feel free to relax — when we're ready, I'll let you know."</div>
+        <div class="ko">셋업에 약 30분 정도 걸릴 것 같아요. 편하게 계세요 — 준비되면 제가 알려드릴게요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="sub-label">④ Phase 4 — 셋업 완료 & 인터뷰 시작</div>
+  <div class="card">
+    <div class="card-label transition">→ 셋업 완료 알림 & 시작 선언</div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"We're all set now — thank you so much for waiting."</div>
+        <div class="ko">이제 다 준비됐어요 — 기다려주셔서 감사해요.</div>
+      </div>
+    </div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"Before we officially begin — I gave you a brief introduction earlier, but now that we're rolling for real, I'd like to introduce the program again for our viewers as well. So let's start with that."</div>
+        <div class="ko">시작하기 전에 — 아까 간단히 소개드리긴 했지만, 지금부터 본격적인 녹화 들어가겠습니다. 더불어 시청자에게도 설명하기 위해, 다시 한번 프로그램 소개로 시작하겠습니다.</div>
+      </div>
+    </div>
+    <div class="note-block" style="margin-top:10px">
+      <div class="label">질문 안내 — 본 질문 전에 끼워넣기</div>
+      <p>"We have around ten questions today — feel free to take three to four minutes on each. There's no rush."<br><span style="font-size:12px;color:#b3a0e0">오늘 질문은 총 10개 내외예요 — 하나당 3-4분 정도 편하게 말씀해주셔도 됩니다. 천천히 하셔도 돼요.</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: BRIEFING -->
+<!-- ============================================================ -->
+<div class="page" id="page-briefing">
+  <div class="topbar">
+    <span class="topbar-section">Pre-Interview</span>
+    <span class="topbar-sep">›</span>
+    <span class="topbar-section"><span class="current">Program Briefing</span></span>
+    <span class="badge badge-teal">~1 min</span>
+  </div>
+  <div class="phase-label">Briefing Script</div>
+  <h1 class="phase-title">Program Briefing</h1>
+  <p class="phase-desc">Read aloud at the start of formal recording. ~1 minute. Slow, deliberate delivery. Eye contact on the final line.</p>
+
+  <div class="note-block" style="margin-bottom:20px">
+    <div class="label">📷 Production Note</div>
+    <p>Camera rolls during this briefing. Capture the guest's facial expressions carefully — these will be used as insert shots.</p>
+  </div>
+
+  <div class="script-line" style="padding:14px 0;border-bottom:1px solid var(--border)">
+    <div class="speaker">YOU</div>
+    <div>
+      <div class="text">"Hello, I'm Yang Se-hee, producer of YTN's [The Prompt]."</div>
+      <div class="ko">안녕하세요. YTN [더 프롬프트]의 제작진 양세희 피디입니다.</div>
+    </div>
+  </div>
+  <div class="script-line" style="padding:14px 0;border-bottom:1px solid var(--border)">
+    <div class="speaker">YOU</div>
+    <div>
+      <div class="text">"A new wave has begun. Many say the moment when artificial intelligence surpasses human intelligence — the 'singularity' — is almost here. But what will that future actually look like?"</div>
+      <div class="ko">AI라는 새로운 물결이 시작됐고, 인공지능의 지능과 기술이 인간을 초월하는 시기, 즉 '특이점'이 곧 온다고 하는데, 과연 그 미래는 어떨까.</div>
+    </div>
+  </div>
+  <div class="script-line" style="padding:14px 0;border-bottom:1px solid var(--border)">
+    <div class="speaker">YOU</div>
+    <div>
+      <div class="text">"Who will benefit from the social, economic, and cultural changes of the AI era? If the economy grows, will that wealth be distributed fairly? Will my job really survive? What kind of future will my children face? We are living through an age full of question marks."</div>
+      <div class="ko">AI 시대에 사회적, 경제적, 문화적 변화들은 누구를 위한 것인가? 경제적 성장이 이루어진다면, 부의 분배는 공평할까? 그리고 나의 직업은 정말 사라지지 않을지, 나의 자녀는 어떤 미래를 맞게 될지, 물음표가 가득한 시대를 통과 중입니다.</div>
+    </div>
+  </div>
+  <div class="script-line" style="padding:14px 0;border-bottom:1px solid var(--border)">
+    <div class="speaker">YOU</div>
+    <div>
+      <div class="text">"That's why YTN created [The Prompt] — to ask how we should live in the age of AI, and to seek answers about humanity's future."</div>
+      <div class="ko">그래서 YTN은 [더 프롬프트]를 통해 AI 시대에 어떻게 살아야 하는지, 인류의 미래를 묻고자 합니다.</div>
+    </div>
+  </div>
+  <div class="script-line" style="padding:14px 0;border-bottom:1px solid var(--border)">
+    <div class="speaker">YOU</div>
+    <div>
+      <div class="text">"The word 'Prompt' here is not just a command we give to AI. We know the difference between an answer that simply retrieves information, and a real answer that includes process and future."</div>
+      <div class="ko">여기서 '프롬프트(Prompt)'는 AI에게 답을 요구하는 명령어가 아닙니다. '정보 취합의 답'과 '과정과 미래를 포함한 해답'의 차이를 우리는 알고 있습니다.</div>
+    </div>
+  </div>
+  <div class="script-line" style="padding:14px 0;border-bottom:1px solid var(--border)">
+    <div class="speaker">YOU</div>
+    <div>
+      <div class="text">"In particular, the ongoing war between the US and Iran, the economic downturn, conflict and anxiety — these are issues the entire world is facing together. And what matters is not just how these events end, but the process itself."</div>
+      <div class="ko">특히, 현재 진행 중인 미국과 이란의 전쟁, 경제 불황, 갈등과 불안 등의 이슈는 전 세계인이 함께 겪는 일이고, '그 사건의 끝'보다 '과정'이 더 중요합니다.</div>
+    </div>
+  </div>
+  <div class="script-line" style="padding:14px 0;border-bottom:1px solid var(--border)">
+    <div class="speaker">YOU</div>
+    <div>
+      <div class="text">"That is why we are meeting with leading thinkers from around the world — to find human answers, grounded in a human perspective, to the question of how we should face this new era of revolution."</div>
+      <div class="ko">따라서, 저희는 전 세계 글로벌 지성들을 직접 만나, '새로운 혁명의 시기'를 어떻게 마주해야 할지 '인간의 관점이 담긴 미래 예측'을 듣고자 합니다.</div>
+    </div>
+  </div>
+  <div class="script-line" style="padding:14px 0">
+    <div class="speaker">YOU</div>
+    <div>
+      <div class="text"><strong>"This program is expected to reach opinion leaders — people who care deeply about global issues and new ideas. It is truly an honor to have you with us today."</strong></div>
+      <div class="ko"><strong>특히, 이 프로그램은 '글로벌 이슈와 새로운 정보에 관심 많은 오피니언 리더'들이 관심있게 볼 것으로 예상됩니다. 모시게 되어, 영광입니다.</strong></div>
+    </div>
+  </div>
+  <div class="note-block" style="margin-top:20px">
+    <div class="label">Delivery Note</div>
+    <p>Pause before the final line. "It is truly an honor" — make eye contact, don't rush. This lands best with a beat of silence before it.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: S1 -->
+<!-- ============================================================ -->
+<div class="page" id="page-s1">
+  <div class="topbar">
+    <span class="topbar-section">Section 1</span>
+    <span class="topbar-sep">›</span>
+    <span class="topbar-section"><span class="current">AI — How Do You Define It?</span></span>
+    <span class="badge badge-teal">Warm-up</span>
+  </div>
+  <div class="phase-label">Section 1 — Intro Questions</div>
+  <h1 class="phase-title">A World-Class Scholar's<br>Relationship with AI</h1>
+  <p class="phase-desc">Light warm-up questions to ease in. Keep answers short and casual. Framing note: "These are lighter questions — please feel free to answer briefly."<br><span style="color:var(--text-mid)">가벼운 질문이니, 짧고 편하게 대답해 주시면 좋겠다.</span></p>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q1</div>
+      <div class="q-text">
+        <h3>How do you define AI?</h3>
+        <div class="ko-q">당신은 AI를 어떻게 정의하나?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"I think of AI as a very powerful new tool for processing and generating language — but it's important to be clear about what that means. It's not a thinking being. It's a system that has learned patterns from an enormous amount of human text. In that sense, it's less like a mind and more like a mirror — reflecting back everything we've ever written, but without the lived experience behind any of it."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q2</div>
+      <div class="q-text">
+        <h3>What AI tool do you use most these days — and how much do you trust what it tells you?</h3>
+        <div class="ko-q">요즘 가장 많이 쓰는 AI는 무엇인지? 그리고 당신은 AI의 판단을 얼마나 믿나?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"I use ChatGPT and Claude regularly — mostly for research, brainstorming, and my chatbot philosophy project. As for trust: I've learned to treat it like a very well-read but sometimes unreliable colleague. It can produce what sounds like a perfectly confident answer and be completely wrong. I've encountered hallucinations — fabricated citations, invented historical details. So I verify. The danger is when people don't."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q3</div>
+      <div class="q-text">
+        <h3>People say human life is a story of desire and lack — and that imperfection is what makes us compelling. So why do we demand perfection from AI?</h3>
+        <div class="ko-q">인간의 생을 결핍과 욕망의 서사라고도 한다. 결핍이 있는 인간은 매력적이기도 하다. 그런데 — 왜 우리는 AI에게 완벽을 요구할까?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"That's such a rich question. The greatest stories in human history — Hamlet, Don Quixote, the Odyssey — are all built on failure, desire, loss. A perfect narrator is actually a boring narrator. There's something almost paradoxical about demanding perfection from a tool we want to help us tell stories. What we might actually want from AI is not perfection, but productive imperfection — something that pushes back, surprises us, even gets things wrong in ways that make us think differently."</p>
+      </div>
+      <div class="note-block" style="margin-top:10px">
+        <div class="label">Storytelling angle</div>
+        <p>His core lens is storytelling. Bring the conversation back to: "What kind of story does a perfect narrator tell?" — likely not a very interesting one.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="transition-card" style="margin-top:8px">
+    <div class="label">→ Transition into Section 2</div>
+    <p>"These are fascinating tensions. Let's go deeper — because you're someone who thinks about human history in very long arcs. And from that perspective, AI is something genuinely new. Let me ask you about that."</p>
+    <p style="color:#b09080;font-size:13px;margin-top:6px">지금까지 정말 흥미로운 이야기를 해주셨어요. 더 깊이 들어가볼게요 — 교수님은 인류의 역사를 아주 긴 호흡으로 바라보시는 분이잖아요. 그 관점에서 AI는 정말 새로운 무언가인데, 그걸 여쭤보고 싶어요.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: S2 -->
+<!-- ============================================================ -->
+<div class="page" id="page-s2">
+  <div class="topbar">
+    <span class="topbar-section">Section 2</span>
+    <span class="topbar-sep">›</span>
+    <span class="topbar-section"><span class="current">AI as a New Species</span></span>
+    <span class="badge badge-teal">Evolution & History</span>
+  </div>
+  <div class="phase-label">Section 2 — Evolutionary Lens</div>
+  <h1 class="phase-title">AI as a New<br>Intelligent Species?</h1>
+  <p class="phase-desc">This section asks Puchner to apply an anthropological and evolutionary lens to AI. Let him draw the historical parallels — Copernicus, Darwin — and connect them to AI's arrival.</p>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q2</div>
+      <div class="q-text">
+        <h3>Every living thing on Earth evolves. Homo sapiens were the first to evolve the capacity for thought. But now AI is arriving — something that may think as well as, or better than, us. Can we view AI through the lens of evolution — as the birth of a new intelligent species?</h3>
+        <div class="ko-q">지구상의 모든 생명체는 진화를 한다. 지구에서 '생각'을 하는 생명체로 진화한 건 현인류 호모 사피엔스가 처음이다. 하지만 곧 인간만큼 혹은 인간보다 더 똑똑한 AI가 등장한다고 한다. AI를 진화론의 관점에서 '새로운 지능을 가진 종'의 탄생으로 볼 수 있을까?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"I'd be careful with the 'species' framing — biological evolution requires bodies, mortality, reproduction, desire. AI has none of those. But as a metaphor, I think it captures something real: something is emerging that will fundamentally change what it means to be human. In that sense, it's less like the birth of a new species and more like the invention of writing — which also changed us profoundly, which also felt, to some, like a threat to what was essentially human."</p>
+      </div>
+      <div class="fallback-block" style="margin-top:10px">
+        <div class="label">If he deflects the evolution framing</div>
+        <p>"Then how would you describe what's happening? Is there a better metaphor from history — something we've seen before?"</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q2–1</div>
+      <div class="q-text">
+        <h3>Why do humans fear the arrival of something more intelligent than themselves? Can you give us a historical example — like Copernicus or Darwin — of how humans reacted when their central place in the universe was challenged?</h3>
+        <div class="ko-q">인간은 왜 자신보다 더 똑똑한 AI의 등장에 두려움을 느낄까? 역사적 관점에서 인간이 새로운 문명과 학설을 마주했을 때 어땠는지 예로 들어서 설명해 주시면 좋겠다. — 코페르니쿠스의 지동설, 찰스 다윈의 진화론.</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"Think about what happened when Copernicus said the Earth orbits the Sun. The reaction was ridicule, then hostility, then denial — because it displaced humanity from the center of the cosmos. Darwin was even more threatening: not only are we not at the center of the universe, we're not even separate from the animals. Both ideas were met with fear and contempt before they became foundational to how we understand ourselves. AI is doing something similar — suggesting that human intelligence may not be unique. And I think the initial reaction of fear is entirely understandable. But history also shows us that these shifts ultimately expand our sense of what's possible, rather than diminishing us."</p>
+      </div>
+      <div class="note-block" style="margin-top:10px">
+        <div class="label">Key historical beats he may mention</div>
+        <p>Copernicus: humans move from center to periphery of the cosmos. Darwin: humans are part of the animal kingdom, not separate from it. AI: humans may not be the sole intelligent beings. Each shift triggered fear, then eventually awe and expansion of perspective.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q2–2</div>
+      <div class="q-text">
+        <h3>Throughout history, every great revolution has been accompanied by conflict — and the victors wrote the history. If AI and humanity are in a kind of contest, who will write the history of the future?</h3>
+        <div class="ko-q">인류의 역사를 보면, '새로운 혁명'은 늘 갈등을 동반한다. 그리고 전쟁에서 이긴 자가 새로운 역사를 썼다. 그렇다면 인간과 AI의 전쟁, 그 미래의 역사는 누가 쓸까?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"History has always been written by those who control the means of telling stories — and for most of human history, that required language, writing, and institutions that preserved them. AI can generate text at a scale no human can match. But history isn't just text. It's the act of assigning meaning — deciding what matters, what to remember, what to forget. That is still a human act. The question I'd ask is: will we remain the ones making those decisions? Because if we outsource that to AI, then yes — the history of this era may be written by something other than us."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="transition-card" style="margin-top:8px">
+    <div class="label">→ Transition into Section 3</div>
+    <p>"The question of who writes history leads us to language — because language is how history gets written at all. And you've spent your career studying exactly that. Let's talk about what happens when AI enters the world of language."</p>
+    <p style="color:#b09080;font-size:13px;margin-top:6px">누가 역사를 쓰느냐는 결국 언어의 문제로 이어지잖아요. 교수님이 평생 연구하신 바로 그 주제이기도 하고요. 이제 AI가 언어의 세계에 들어왔을 때 무슨 일이 일어나는지 이야기해볼게요.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: S3 -->
+<!-- ============================================================ -->
+<div class="page" id="page-s3">
+  <div class="topbar">
+    <span class="topbar-section">Section 3</span>
+    <span class="topbar-sep">›</span>
+    <span class="topbar-section"><span class="current">Language, LLMs & Culture</span></span>
+    <span class="badge badge-teal">Core Territory</span>
+  </div>
+  <div class="phase-label">Section 3 — Language & Power</div>
+  <h1 class="phase-title">Language, LLMs<br>&amp; Cultural Power</h1>
+  <p class="phase-desc">This is Puchner's home territory. He's written about the history of writing and how language shapes civilization. Give this room to breathe — his answers here will be the richest.</p>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q3</div>
+      <div class="q-text">
+        <h3>Human civilization was built on language, writing, and the recording of knowledge. AI's breakthrough is also built on language — Large Language Models. Why is language so central to both human civilization and to AI?</h3>
+        <div class="ko-q">인간은 '언어'의 발달과 '문자'의 탄생, 그리고 '기록'으로 이어지며 새로운 역사를 썼다. AI 또한 '대형 언어 모델' LLM이 변곡점이라고 얘기한다. AI의 탄생과 성장에 '언어'가 왜 중요한가?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"Language is the technology that made human civilization possible. Every major leap — from cave paintings to the alphabet, from the printing press to the internet — has been a revolution in how we store and share language. And now LLMs have done something extraordinary: they've processed the entire written record of human civilization and learned the patterns within it. In a sense, they've read everything. That's unprecedented. But here's what's also true: they know our words, but they don't know our lives. They've absorbed the surface of human culture without the lived experience underneath it."</p>
+      </div>
+      <div class="note-block" style="margin-top:10px">
+        <div class="label">Context he may draw on</div>
+        <p>The word "algorithm" comes from the name of a 9th-century Persian mathematician, al-Khwārizmī — a reminder that mathematics and language have been intertwined from the start. He may frame AI as the convergence of the humanities and sciences.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q3–1</div>
+      <div class="q-text">
+        <h3>Until now, only humans have been storytellers. But AI has gained language. Yuval Harari warned at Davos this year that if AI masters language and creates more compelling narratives than humans, it could reshape power structures and social systems. Do you agree?</h3>
+        <div class="ko-q">지금까지 지구상에 인간만이 '스토리텔러'였다. 하지만 AI가 언어를 갖게 되면서 상황은 달라졌다. 유발 하라리는 세계경제포럼에서 '인공지능이 언어를 장악하여 인간보다 더 뛰어난 서사와 논리를 만들어 낼 수 있다면 권력의 핵심도 바뀌고, 사회 시스템도 바뀔 것이다'라고 경고했다. 그의 주장에 대해서 어떻게 생각하나?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"Harari is raising an alarm I take seriously. Language has always been power — whoever controls the dominant narrative controls culture. That's been true from sacred texts to newspapers to social media. Now AI can produce language at a scale and speed no human can match. The question is: will the stories AI tells be the stories we've chosen? Or will we find ourselves living inside narratives we didn't author? I think the warning is valid. But I'd also say: humans still decide which stories become authoritative. The danger comes when we stop asking who's making that decision."</p>
+      </div>
+      <div class="note-block" style="margin-top:10px">
+        <div class="label">Source</div>
+        <p>Harari spoke at the World Economic Forum in Davos, January 2026. Quote: "When AI controls language, it shapes society."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q3–2</div>
+      <div class="q-text">
+        <h3>Language carries more than information — it carries culture and emotion. French is called the language of love; Italian sounds like song; Korean is celebrated for its scientific precision and expressive range. Can AI's language ever carry that kind of beauty? What would it need to become a truly global language?</h3>
+        <div class="ko-q">언어는 단순 정보 전달 외에도 문화와 정서를 담고 있다. 한국어도 아주 과학적인 문자라는 평이 있고, 의성어나 의태어가 많아서 감정 표현이 다양하다. AI의 언어도 시대의 정서를 반영한 아름다움을 담을 수 있을까? AI의 언어가 '시대를 초월한 글로벌 언어'가 되기 위해서 갖춰야 할 것은 무엇일까?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"AI can absolutely mimic the surface of beautiful language — the rhythm, the syntax, even the emotional register — because it has learned from centuries of beautiful writing. What I find genuinely impressive is its range. But beauty in language isn't just style — it's the trace of a life behind the words. When I read Chekhov, I'm not just reading sentences; I'm encountering a consciousness. The Korean language is a fascinating case — your sound symbolism, the way emotion is woven directly into words, reflects something about how Korean culture experiences the world. AI can learn to imitate that. Whether it can genuinely carry it is a different question."</p>
+      </div>
+      <div class="note-block" style="margin-top:10px">
+        <div class="label">Korea angle — use this</div>
+        <p>Mentioning Korean specifically (scientific writing system, rich emotional vocabulary) will resonate with him — he's interested in K-culture and interprets culture as the movement of power. He'll appreciate the specificity.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q3–3</div>
+      <div class="q-text">
+        <h3>You've been doing something remarkable — having conversations with historical philosophers through AI chatbots. Socrates, Confucius, the Buddha, Jesus — none of them wrote their own words. What did you discover about AI's potential through that project?</h3>
+        <div class="ko-q">인공지능의 언어를 창의적으로 쓰는 방법에 대해서도 연구 중이시죠? 특히, 챗봇으로 과거의 철학자들과 대화를 시도한 계기가 궁금하고, 그것을 통해서 AI의 언어적 잠재력을 발견하셨는지도 궁금하다.</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"What started me on this project was a simple observation: Socrates, Confucius, the Buddha, Jesus — none of them wrote. They spoke. Their words survive only because disciples wrote them down. So in a strange way, these figures already exist in our world only as text reconstructed by others. That made me curious: what happens when you give that text back to AI and ask it to speak again? What I discovered is genuinely interesting — and genuinely limited. The chatbot Socrates is witty and philosophically coherent. But it never surprises you the way a real person does. It never refuses to answer. It never gets tired. And that absence of limitation is itself a kind of answer about what AI is."</p>
+      </div>
+      <div class="note-block" style="margin-top:10px">
+        <div class="label">Key insight he may share</div>
+        <p>LLMs are built on written text — but the great ancient thinkers spoke, not wrote. Their ideas survive through disciples' records. AI reconstructing them reveals a fundamental gap: LLMs can write, but can they speak in the full human sense?</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q3–4</div>
+      <div class="q-text">
+        <h3>In those conversations with AI philosophers — did you ever receive something that genuinely inspired you? Even if it came from a hallucination or an error?</h3>
+        <div class="ko-q">챗봇 철학자와 대화하면서 혹시, 영감을 받은 적도 있는지? 챗봇 철학자와의 대화에서 '환각 현상(잘못된 정보)'를 만났을 때.</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"Yes — actually, yes. There were moments when the chatbot philosopher said something factually wrong, or invented a connection that didn't exist, and instead of shutting the conversation down, it opened it up. I found myself thinking: wait, what if that were true? What would follow from that? The error became a prompt for my own thinking. I came to see the hallucination not as a failure of the tool but as an invitation — a strange, generative accident. In some ways that's the most human thing about AI: its mistakes can be more interesting than its successes."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="transition-card" style="margin-top:8px">
+    <div class="label">→ Transition into Section 4</div>
+    <p>"Those conversations with AI philosophers almost sound like what happened in ancient academies — people gathered to debate, to question, to push each other's thinking. Let me ask you about what that means for education today."</p>
+    <p style="color:#b09080;font-size:13px;margin-top:6px">AI 철학자와의 대화가 마치 고대 그리스 아카데미에서 벌어지던 토론 같은 느낌이에요 — 서로 질문하고, 생각을 밀어붙이는. 그게 오늘날 교육에 어떤 의미인지 여쭤볼게요.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: S4 -->
+<!-- ============================================================ -->
+<div class="page" id="page-s4">
+  <div class="topbar">
+    <span class="topbar-section">Section 4</span>
+    <span class="topbar-sep">›</span>
+    <span class="topbar-section"><span class="current">Philosophy & Education</span></span>
+    <span class="badge badge-teal">Humanities</span>
+  </div>
+  <div class="phase-label">Section 4 — The Humanities in the AI Age</div>
+  <h1 class="phase-title">Philosophy &<br>the Humanities</h1>
+  <p class="phase-desc">Puchner is a passionate advocate for the humanities in the AI era. This section explores what kind of learning survives — and thrives — when AI can write essays and answer questions.</p>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q4</div>
+      <div class="q-text">
+        <h3>Those conversations with AI philosophers remind me of ancient Greek academies — people gathered in amphitheaters to debate and think together. In the AI age, do you dream of returning to that original form of learning?</h3>
+        <div class="ko-q">챗봇 철학자들과의 대화는 그리스 로마 시대의 아카데미, 대형 원형 극장의 토론을 연상시킨다. AI 시대에 다시 배움의 원형으로 돌아가는 수업을 꿈꾸는가?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"Absolutely — and I think AI might actually make that possible again. If AI handles the information retrieval, the summarizing, the first-draft writing, then what's left for human education? Dialogue. Debate. The Socratic method. Sitting across from someone who challenges you, who doesn't accept your first answer, who asks you to go deeper. That's what the ancient academies were doing, and it's the part of education that AI genuinely cannot replace. I dream of a classroom where the textbook is AI and the teacher is a Socratic guide."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q4–1</div>
+      <div class="q-text">
+        <h3>You've advocated strongly for the humanities. Yet as of 2021, only 8% of Harvard's incoming class said they were most interested in arts and humanities. As someone who champions this field — why do the humanities matter in the age of AI?</h3>
+        <div class="ko-q">당신은 인문학의 중요성도 강조하고 있다. 2021년 기준, 당신이 재직 중인 하버드 신입생의 8%만이 예술과 인문학에 가장 관심이 있다고 말했다고 한다. AI 시대에 왜 인문학이 중요할까?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"Eight percent — that number keeps me up at night. And yet I'd argue that the humanities have never been more urgent than they are right now. Because the humanities ask the question that AI cannot answer for us: what does it mean to be human? What do we owe each other? What is a life worth living? These are not decorative questions. They're the questions that determine how we build AI, how we regulate it, how we live with it. An engineer who has never thought about power, or narrative, or the history of how technologies reshape societies — that engineer is flying blind. The humanities are not a luxury. They are the user manual for being human in a technological world."</p>
+      </div>
+      <div class="fallback-block" style="margin-top:10px">
+        <div class="label">Fallback / push further</div>
+        <p>"If a student comes to you and says — 'Why should I study literature when AI can write better than me?' — what do you tell them?"</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="transition-card" style="margin-top:8px">
+    <div class="label">→ Transition into Section 5</div>
+    <p>"The question of what to study leads directly to the question of what universities are for. And there are some big predictions being made about their future. Let me ask you about that."</p>
+    <p style="color:#b09080;font-size:13px;margin-top:6px">무엇을 배워야 하느냐는 질문은 대학이 존재하는 이유로 이어지잖아요. 그리고 대학의 미래에 대해 아주 큰 예측들이 나오고 있고요. 그 이야기를 해볼게요.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: S5 -->
+<!-- ============================================================ -->
+<div class="page" id="page-s5">
+  <div class="topbar">
+    <span class="topbar-section">Section 5</span>
+    <span class="topbar-sep">›</span>
+    <span class="topbar-section"><span class="current">Future of Education</span></span>
+    <span class="badge badge-blue">Global lens</span>
+  </div>
+  <div class="phase-label">Section 5 — Education in Transition</div>
+  <h1 class="phase-title">What Education<br>Survives?</h1>
+  <p class="phase-desc">This section asks Puchner to weigh in on big structural predictions about universities and learning — including Fei-Fei Li's claim and Korea's specific education crisis.</p>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q5</div>
+      <div class="q-text">
+        <h3>At a forum in Korea last year, Stanford professor Fei-Fei Li said: "Within 50 years, today's universities will disappear — and this moment is a once-in-a-century opportunity to redesign education after the Industrial Revolution." Do you agree? And if so, what needs to change most urgently?</h3>
+        <div class="ko-q">지난해 한국의 한 포럼에서, 스탠퍼드 대학 페이페이 리 교수는 "50년 내에 지금의 대학은 사라진다"고 표현했다. 이러한 견해에 대해 어떻게 생각하시는지, 동의한다면 가장 시급하게 변화해야 할 것은 무엇이라고 생각하시는지?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"I think Fei-Fei Li is right that the university as a credential factory is in serious trouble. If AI can produce what used to require four years of study, the economic argument for that model collapses. But I don't think the university as an idea disappears — because the university isn't just about information transfer. It's about initiation into a community of inquiry. The question is: what does that look like when AI does the information work? My answer is: more time for genuine intellectual engagement, for ethics, for the kinds of conversations that require another human being across the table."</p>
+      </div>
+      <div class="note-block" style="margin-top:10px">
+        <div class="label">Source</div>
+        <p>Fei-Fei Li at the SBS D-Forum, June 2025: "Within 50 years, today's universities will disappear — this is a once-in-a-century opportunity to redesign education."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q5–1</div>
+      <div class="q-text">
+        <h3>Korea has one of the world's highest university enrollment rates — around 70–80% of high school graduates go to university. But there's growing doubt about whether that education actually helps with employment or personal fulfillment. With AI making so many kinds of learning accessible, what education do future generations actually need?</h3>
+        <div class="ko-q">대한민국의 대학 진학률은 세계 1위다. 고등학교 졸업생의 70-80%가 대학에 간다. 하지만 지금의 대학 교육이 취업 혹은 개인의 삶에 얼마나 영향을 끼치는지는 의문이다. AI를 통해 다양한 학습이 가능할텐데 — 미래 세대는 어떤 교육이 필요할까?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"Korea is a fascinating case — one of the most educated populations in the world, and also one of the most anxious about what that education is actually worth. What I'd say is this: the future needs people who can ask good questions, who can evaluate information critically, who can find and create meaning — not just process data. Those skills don't come from memorizing content. They come from engaging deeply with difficult texts, with history, with ideas that resist simple answers. AI can accelerate the delivery of information. It cannot give you wisdom. And wisdom is what this moment requires."</p>
+      </div>
+      <div class="fallback-block" style="margin-top:10px">
+        <div class="label">If he's abstract — push for specifics</div>
+        <p>"If you were designing a curriculum for Korean high schoolers today — what's one subject you'd add, and one you'd remove?"</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="transition-card" style="margin-top:8px">
+    <div class="label">→ Transition into Section 6</div>
+    <p>"You've written two major books about human records — writing and culture. And we're living through a moment that will itself become a record. Let me close with some questions about books, libraries, and what endures."</p>
+    <p style="color:#b09080;font-size:13px;margin-top:6px">교수님은 인간의 기록에 대해 두 권의 큰 책을 쓰셨어요. 그리고 우리는 지금 그 자체로 기록이 될 시대를 통과하고 있잖아요. 책과 도서관, 그리고 무엇이 남는가에 대한 질문으로 마무리해볼게요.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: S6 -->
+<!-- ============================================================ -->
+<div class="page" id="page-s6">
+  <div class="topbar">
+    <span class="topbar-section">Section 6</span>
+    <span class="topbar-sep">›</span>
+    <span class="topbar-section"><span class="current">Books & the Human Record</span></span>
+    <span class="badge badge-teal">Closing territory</span>
+  </div>
+  <div class="phase-label">Section 6 — Books, Libraries & Legacy</div>
+  <h1 class="phase-title">Books &<br>the Human Record</h1>
+  <p class="phase-desc">This is where the interview becomes most human. Books, libraries, Han Kang, the Oslo Future Library — these questions connect Puchner's intellectual world to the cultural moment in Korea.</p>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q6</div>
+      <div class="q-text">
+        <h3>In Korea, a new word has appeared: "text hip." Young people in their 20s and 30s are making books trendy again — being seen with a book, posting about reading. And surprisingly, long, dense books have surged in popularity. As a scholar of writing and culture, how do you interpret this?</h3>
+        <div class="ko-q">최근 몇 년 전부터 한국에서는 '텍스트 힙'이라는 신조어가 등장했다. 2030 젊은이들이 '책'과 함께 있는 것이 '트렌드'가 됐고 책 관련 콘텐츠들이 굉장히 많아졌다. 게다가 숏폼과 SNS 시대에 '벽돌책'이 다시 급부상했다. 이런 문화적 현상을 어떻게 해석할 수 있을까?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"'Text hip' — I love that phrase. What I see in this trend is a kind of cultural resistance. In a world where everything is algorithmically optimized for maximum engagement, choosing a long, slow book is almost a political act. It says: I will not let my attention be managed for me. Books are one of the few objects in modern life that don't notify you, don't update, don't adjust themselves to keep you hooked. And I think young people are sensing that. There's something they find in a book that a screen can't give them — a depth of attention, a sense of time passing differently. From a cultural history perspective, this is what always happens when a new medium threatens to overwhelm: the old medium becomes precious again."</p>
+      </div>
+      <div class="note-block" style="margin-top:10px">
+        <div class="label">K-culture connection</div>
+        <p>He's interested in K-culture. This is a great moment to make him feel the specificity of Korea — not just as a data point, but as a cultural phenomenon he'll want to think about.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q6–1</div>
+      <div class="q-text">
+        <h3>Like the Oslo Future Library Project — where authors donate unpublished manuscripts to be opened in 2114 — do you believe libraries will still exist 100 years from now? And could the descendants of today's readers open Han Kang's sealed novel in Oslo a century from now?</h3>
+        <div class="ko-q">2114년, 오슬로 미래 도서관 프로젝트처럼 100년 후에도 도서관이 존재할까? 100년 후의 후손들이 한강 작가가 오슬로 미래 도서관에 기증한 미공개 소설책을 읽을 수 있을까?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"Yes — absolutely yes. Libraries have survived every technological revolution in human history — the printing press, photography, radio, the internet. They survive because they're not just storage facilities. They're acts of faith in the future. The Oslo Future Library is one of the most beautiful ideas I've encountered: authors writing for readers who don't exist yet, trusting that someone will be there in a hundred years to receive their words. Han Kang contributing to that project — a Korean writer, a Nobel laureate, entrusting her words to the future — moves me deeply. That gesture is profoundly human. And I believe it will endure."</p>
+      </div>
+      <div class="note-block" style="margin-top:10px">
+        <div class="label">Han Kang reference</div>
+        <p>Han Kang donated an unpublished novel to the Oslo Future Library — to be opened in 2114. This connects Korean literature, the Nobel Prize, and the act of writing across time. Powerful for a Korean audience.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">Q6–2</div>
+      <div class="q-text">
+        <h3>Humanity is passing through another decisive moment in world history. How do you hope this era will be recorded?</h3>
+        <div class="ko-q">인류는 세계사에 또 한 번의 결정적인 시점을 통과 중이다. 이 시기가 어떻게 기록되길 바라나?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"I hope it's recorded as a moment when we asked the right questions — before it was too late to ask them. Every great technological revolution has been followed by a period of reckoning: who benefits, who loses, who gets to tell the story. I hope future historians look back at this decade and see a generation that chose to remain the authors of its own experience. Not passive consumers of AI-generated content, but active participants in deciding what this technology is for, and what it means to be human in relation to it. That's the story I want written."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="transition-card" style="margin-top:8px">
+    <div class="label">→ Transition into Closing</div>
+    <p>"We're getting close to the end — but I have a few final questions I ask every guest on The Prompt. These are the big picture ones."</p>
+    <p style="color:#b09080;font-size:13px;margin-top:6px">거의 다 왔어요 — 더 프롬프트에 나오시는 모든 분들께 드리는 마무리 질문들이 있어요. 큰 그림의 질문들입니다.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: CLOSING -->
+<!-- ============================================================ -->
+<div class="page" id="page-closing">
+  <div class="topbar">
+    <span class="topbar-section">Closing</span>
+    <span class="topbar-sep">›</span>
+    <span class="topbar-section"><span class="current">Questions for All Guests</span></span>
+    <span class="badge badge-teal">Standard</span>
+  </div>
+  <div class="phase-label">Closing — Standard Questions</div>
+  <h1 class="phase-title">Questions for<br>All Guests</h1>
+  <p class="phase-desc">These four questions are asked to every guest. Keep answers concise — you want quotable final statements. C1 and C4 are the essential bookends.</p>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">C1 ★</div>
+      <div class="q-text">
+        <h3>Is AI a blessing or a curse — Star Trek or Terminator?</h3>
+        <div class="ko-q">AI는 축복인가, 저주인가 — 스타트렉인가, 터미네이터인가?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"I'd say neither — or rather, both, depending on what we do. Writing was once considered a curse by some ancient philosophers. Plato worried it would destroy memory, that people would stop thinking for themselves and just look things up. He wasn't entirely wrong — but writing also gave us Homer, the Bible, Shakespeare. AI is the same kind of inflection point. It can be Star Trek: a tool that frees us for deeper human pursuits. Or it can be Terminator: a force we built without asking whether we should, that we then couldn't control. The technology doesn't decide. We do."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">C2</div>
+      <div class="q-text">
+        <h3>When do you think the singularity arrives? And personally — what are you doing to prepare for the age of AI?</h3>
+        <div class="ko-q">특이점이 언제 온다고 보시나요? 그리고 본인은 지금 AI 시대를 위해 무엇을 준비하고 있나요?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"I'm skeptical of the singularity as a concept — it implies a clean break, a single moment, and history almost never works that way. Major shifts are always messier and slower and more uneven than we expect. Personally, I'm preparing by continuing to ask the questions my field has always asked: who tells the story, who controls language, who gets to decide what gets remembered. I'm expanding my chatbot philosophy project. And I'm teaching — because I believe education is the most important site of preparation we have. If we teach people to think critically about AI, to ask what it can and can't do, that matters more than any technical readiness."</p>
+      </div>
+      <div class="note-block" style="margin-top:10px">
+        <div class="label">Alternative framing</div>
+        <p>"Ray Kurzweil has predicted 2030 for decades — and Elon Musk says it's already begun. What would you say to them?"</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">C3</div>
+      <div class="q-text">
+        <h3>Some say the Renaissance man — the generalist — thrives in the age of AI. Do you agree?</h3>
+        <div class="ko-q">AI 시대에는 르네상스적인 인간이 잘 살아갈 수 있다고 하는데 — 당신의 생각은요?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"I do agree — and I say this as someone who is perhaps exhibit A of the Renaissance person. I work across drama, literature, philosophy, cultural history, and now AI. What connects all of those fields is the ability to move between them, to see patterns that specialists miss, to ask questions that cross boundaries. AI is extraordinarily good at depth within a defined domain. What it cannot do is make the unexpected connection — the leap from ancient Greek theater to the design of a chatbot, or from the history of writing to what LLMs reveal about human cognition. That breadth, that willingness to be a generalist, becomes more valuable, not less, in the age of AI."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block" onclick="toggleQ(this)">
+    <div class="q-header">
+      <div class="q-num">C4 ★</div>
+      <div class="q-text">
+        <h3>Ten years from now, a hundred years from now — how will life with AI be different? And if there's one thing humanity manages to hold onto, what is it?</h3>
+        <div class="ko-q">지금으로부터 10년 후, 100년 후 — AI와 인간의 삶은 어떻게 달라져 있을까요? 마지막까지 인간이 지켜낸 단 하나가 있다면 무엇일까요?</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="q-body">
+      <div class="expected-block">
+        <div class="label">Puchner's Voice</div>
+        <p>"In ten years, I think AI will be embedded in almost every professional domain — medicine, law, education, creative work. Most jobs will have changed form. In a hundred years — I think about the Oslo Future Library. I believe someone will walk into a library in 2114, sit down, and read Han Kang's manuscript. Not because libraries are inevitable, but because humans will choose to preserve them, as an act of faith. What humanity holds onto — I think it's the need to tell our own stories. Not to consume stories generated for us, but to be the authors of our own experience. That impulse — to write, to record, to say 'I was here, and this is what I saw' — I believe that is the last distinctly human act. And I don't think AI can take it from us, unless we give it away."</p>
+      </div>
+      <div class="note-block" style="margin-top:10px">
+        <div class="label">촬영안 메모</div>
+        <p>"마틴 푸크너는 100년 후에도 도서관이 존재할 거고, 인류애가 있을 거라고 말함" — 이 답변 유도하는 게 목표.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: END -->
+<!-- ============================================================ -->
+<div class="page" id="page-end">
+  <div class="topbar">
+    <span class="topbar-section">Wrap-up</span>
+    <span class="topbar-sep">›</span>
+    <span class="topbar-section"><span class="current">Phase 5 — Thank You & Gift</span></span>
+    <span class="badge badge-teal">Final</span>
+  </div>
+  <div class="phase-label">Phase 5 — Wrap & Gift</div>
+  <h1 class="phase-title">Thank You<br>&amp; Gift</h1>
+  <p class="phase-desc">End gracefully. The gift moment is on camera — keep it warm and natural.</p>
+
+  <div class="card">
+    <div class="card-label transition">→ Formal on-camera closing</div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"Professor Puchner — this has been genuinely illuminating. Thank you so much for your time and for speaking with us so openly. On behalf of YTN and [The Prompt], we are truly grateful."</div>
+        <div class="ko">교수님, 오늘 정말 많은 것을 배웠습니다. 이렇게 솔직하게 이야기해주셔서 진심으로 감사드립니다. YTN [더 프롬프트]를 대표해서 깊이 감사드립니다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label transition">→ 선물 증정 (on camera)</div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"We brought a small gift from Korea — something we hope captures a little of what we talked about today."</div>
+        <div class="ko">한국에서 작은 선물을 가져왔어요 — 오늘 나눈 이야기를 조금이나마 담은 것으로요.</div>
+      </div>
+    </div>
+    <div class="note-block" style="margin-top:10px">
+      <div class="label">선물 팁</div>
+      <p>그가 K-culture에 관심 있다는 걸 활용해. 한국적인 것이면서 문화/언어/글쓰기와 연결되는 것이 가장 좋아. 예: 한글 디자인 소품, 한국 작가 영문판 책 (한강), 전통 문양 관련 아이템 등.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label transition">→ Off-camera 마무리</div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"Is there anything you felt we didn't get to — anything you'd like to add?"</div>
+        <div class="ko">혹시 우리가 못 다룬 것 중에 꼭 하고 싶으셨던 말씀이 있으신가요?</div>
+      </div>
+    </div>
+    <div class="note-block" style="margin-top:10px">
+      <div class="label">카메라 계속 돌릴 것</div>
+      <p>인터뷰 끝난 직후의 캐주얼한 말이 가장 좋은 컷이 되는 경우 많아. 카메라 끄지 말 것.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label transition">→ 방영 안내</div>
+    <div class="script-line">
+      <div class="speaker">YOU</div>
+      <div>
+        <div class="text">"We'll be in touch about the air date. We'd love to send you the final cut when it's ready."</div>
+        <div class="ko">방영 일정 잡히면 연락드릴게요. 편집본 나오면 꼭 먼저 보내드리겠습니다.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: ABOUT -->
+<!-- ============================================================ -->
+<div class="page" id="page-about">
+  <div class="topbar">
+    <span class="topbar-section">Reference</span>
+    <span class="topbar-sep">›</span>
+    <span class="topbar-section"><span class="current">About Martin Puchner</span></span>
+  </div>
+  <div class="phase-label">Quick Reference</div>
+  <h1 class="phase-title">About<br>Martin Puchner</h1>
+  <p class="phase-desc">For coordinators, English tutors, or anyone who needs background on our interview subject.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:20px 24px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin-bottom:14px">Basic Info</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div><div style="font-size:11px;color:var(--text-dim);margin-bottom:2px">Full Name</div><div style="font-size:14px;color:var(--text)">Martin Puchner</div></div>
+        <div><div style="font-size:11px;color:var(--text-dim);margin-bottom:2px">Born</div><div style="font-size:14px;color:var(--text)">1969</div></div>
+        <div><div style="font-size:11px;color:var(--text-dim);margin-bottom:2px">Current Role</div><div style="font-size:14px;color:var(--text)">Byron and Anita Wien Professor of Drama & English and Comparative Literature, Harvard University</div></div>
+        <div><div style="font-size:11px;color:var(--text-dim);margin-bottom:2px">Awards</div><div style="font-size:14px;color:var(--text)">Guggenheim Fellowship (2017), Humboldt Prize (2021)</div></div>
+      </div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:20px 24px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.18em;color:var(--blue);text-transform:uppercase;margin-bottom:14px">Key Interests</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--accent);font-size:14px;flex-shrink:0">→</span><span style="font-size:14px;color:var(--text)">How writing and storytelling shaped human civilization</span></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--accent);font-size:14px;flex-shrink:0">→</span><span style="font-size:14px;color:var(--text)">AI's relationship to language and cultural power</span></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--accent);font-size:14px;flex-shrink:0">→</span><span style="font-size:14px;color:var(--text)">Chatbot conversations with historical philosophers</span></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--accent);font-size:14px;flex-shrink:0">→</span><span style="font-size:14px;color:var(--text)">K-culture; interprets culture as the movement of power</span></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--accent);font-size:14px;flex-shrink:0">→</span><span style="font-size:14px;color:var(--text)">Advocacy for humanities in higher education</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:20px 24px;margin-bottom:16px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.18em;color:var(--green);text-transform:uppercase;margin-bottom:16px">Key Books</div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;gap:16px;align-items:flex-start">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:22px;color:var(--border);font-weight:500;min-width:32px">1</div>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:16px;color:var(--text);margin-bottom:2px">Culture: A New World History</div>
+          <div style="font-size:12px;color:var(--text-dim)">한국어판: [컬처, 문화로 쓴 세계사] · How human culture became history — the long arc from cave paintings to the internet.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:flex-start">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:22px;color:var(--accent);font-weight:500;min-width:32px">2</div>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:16px;color:var(--text);margin-bottom:2px">The Written World</div>
+          <div style="font-size:12px;color:var(--text-dim)">한국어판: [글이 만든 세계] · The history of human civilization is the history of writing. Main reference for this interview.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:rgba(126,200,200,.06);border:1px solid rgba(126,200,200,.2);border-radius:6px;padding:16px 20px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--accent);margin-bottom:8px">One-line summary for the team</div>
+    <p style="font-size:14px;color:var(--text-mid);line-height:1.7">Martin Puchner is a Harvard professor of literature and cultural history who argues that human civilization is fundamentally built on storytelling and writing — and that AI, by gaining the power of language, is transforming who controls culture, knowledge, and ultimately, the future.</p>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+function toggleSidebar() {
+  document.querySelector('.sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('active');
+}
+function closeSidebar() {
+  document.querySelector('.sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('active');
+}
+
+const pages = ['pre','briefing','s1','s2','s3','s4','s5','s6','closing','end','about'];
+
+function goTo(id, el) {
+  pages.forEach(p => {
+    const pg = document.getElementById('page-'+p);
+    if (pg) { pg.style.display='none'; pg.classList.remove('active'); }
+  });
+  const target = document.getElementById('page-'+id);
+  if (target) { target.style.display='block'; target.classList.add('active'); }
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (el) el.classList.add('active');
+  window.scrollTo(0,0);
+  updateProgress(id);
+  closeSidebar();
+}
+
+function updateProgress(id) {
+  const idx = pages.indexOf(id);
+  const pct = idx < 0 ? 0 : Math.round((idx/(pages.length-1))*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+}
+
+function toggleQ(el) { el.classList.toggle('open'); }
+</script>
+</body>
+</html>
